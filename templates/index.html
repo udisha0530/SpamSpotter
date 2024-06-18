@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spam Ham Detector</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start; /* Adjusted to push form area to the top */
+            height: 100vh;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-top: 20px;
+            font-size: 2em;
+            text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        form {
+            max-width: 400px;
+            width: 100%;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: bold;
+            font-size: 1.2em;
+            text-align: left;
+        }
+
+        textarea {
+            width: calc(100% - 20px);
+            margin-right: 20px;
+            padding: 10px;
+            margin-bottom: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            resize: vertical;
+            font-size: 14px;
+            box-sizing: border-box;
+            text-align: left;
+        }
+
+        input[type="submit"] {
+            background-color: #4caf50;
+            color: #fff;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+            font-weight: bold;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        .prediction-container {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .spam {
+            color: #ff0000;
+            font-weight: bold;
+            font-style: italic;
+        }
+
+        .ham {
+            color: #008000;
+            font-weight: bold;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <h1>Spam Ham Detector</h1>
+
+    <form action="/predict" method="post">
+        <label for="message">Enter your message:</label><br>
+        <textarea id="message" name="message" rows="4" placeholder="Type your message here..."></textarea><br>
+        <input type="submit" value="Predict">
+    </form>
+
+    {% if prediction %}
+        <div class="prediction-container {% if prediction == 'spam' %}spam{% else %}ham{% endif %}">
+            <p>Prediction: <span class="{{ prediction }}">{{ prediction }}</span></p>
+            <p>Message: {{ message }}</p>
+        </div>
+    {% endif %}
+</body>
+</html>
