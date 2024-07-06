@@ -1,5 +1,5 @@
 import nltk
-
+nltk.download("wordnet")
 from nltk.stem import LancasterStemmer
 from nltk.stem import WordNetLemmatizer
 from sklearn.base import BaseEstimator, TransformerMixin
